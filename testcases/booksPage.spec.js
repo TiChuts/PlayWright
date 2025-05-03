@@ -20,7 +20,7 @@ test("delete books", async ({ book }) => {
 
   const search = "Learning JavaScript Design Patterns";
   await book.fillSearchBox(search);
-  await book.clickDelBook();
+  await book.deleteBookByName(search);
   await book.fillSearchBox(search);
-  // await book.checkBooks();
+  expect(await book.isBookVisible(search)).toBeFalsy();
 });

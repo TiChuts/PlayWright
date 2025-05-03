@@ -12,6 +12,6 @@ const test = base.test.extend({
   },
 });
 
-const { expect } = base;
+const expect = base.expect;
 
 module.exports = { test, expect };

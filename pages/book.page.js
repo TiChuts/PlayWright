@@ -92,5 +92,29 @@ class Book {
   async checkBooks() {
     await expect(page.locators.checkBooks.toBeVisible());
   }
+
+  async deleteBookByName(bookName) {
+    // click Delete & OK button
+    const iconDelete = this.page.locator(`//span[.='${bookName}']/ancestor::div[@role='row']//span[@title='Delete']`);
+    const btnOk = this.page.locator("//button[.='OK']");
+    await iconDelete.click();
+    await btnOk.click();
+
+    // Accept dialog
+    let event = "accept";
+    await this.page.waitForEvent('dialog').then(async d => {
+      if (event == 'dismiss') {
+          await d.dismiss();
+      } else {
+          await d.accept();
+      }
+      return d.message();
+    })
+  }
+
+  async isBookVisible(bookName) {
+    const lnkBook = this.page.locator("//a[text()='${bookName.trim()}']")
+    return lnkBook.isVisible()
+  }
 }
 module.exports = { Book };
