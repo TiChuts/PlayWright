@@ -12,5 +12,4 @@ module.exports = {
     value: "//span[@id='delete-record-undefined']",
   },
   delOKButton: { role: "button", name: "OK" },
-  emptyRows: { type: "xpath", value: "//div[text()='No rows found']" },
 };

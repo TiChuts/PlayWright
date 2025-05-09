@@ -1,17 +1,15 @@
-const base = require("@playwright/test");
-const { Book } = require("../pages/book.page");
+const { test, expect } = require("@playwright/test");
+const { BookPage } = require("../core/pages/book.page");
+const { BasePage } = require("../core/pages/base.page");
 
-const test = base.test.extend({
-  /**
-   * @param {import('@playwright/test').Page} page
-   * @param {Function} use
-   */
-  book: async ({ page }, use) => {
-    const book = new Book(page);
-    await use(book);
+const bookFixture = test.extend({
+  bookPage: async ({ page }, use) => {
+    const bookPage = new BookPage(page);
+    await use(bookPage);
+  },
+  basePage: async ({ page }, use) => {
+    const basePage = new BasePage(page);
+    await use(basePage);
   },
 });
-
-const expect = base.expect;
-
-module.exports = { test, expect };
+module.exports = { bookFixture, expect };
